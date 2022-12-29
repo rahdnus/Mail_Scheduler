@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="{{ url_for("form")}}" method="post">
+        <select name="Subject" id="Subject">
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+        </select>
+        <button type="submit">Done</button>
+    </form>
+</body>
+
+</html>

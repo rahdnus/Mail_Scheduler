@@ -1,8 +1,9 @@
 import smtplib
 import ssl
 from email.message import EmailMessage
-from flask import url_for,Flask
+from flask import url_for,Flask, request, render_template
 from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import date, datetime
 
 email_sender = 'rahdnus119@gmail.com'
 email_password = 'ftnecmsombzteuti'
@@ -30,11 +31,17 @@ def sendMail(email_receiver,subject,body):
         smtp.sendmail(email_sender, email_receiver, em.as_string())
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(lambda:sendMail(email_receiver,subject,body),'interval',minutes=0.05)
+sched.add_job(lambda:sendMail(email_receiver,subject,body),'date',run_date = datetime(2022, 12, 29, 19, 42, 0) )
 sched.start()
 
-@app.route('/')
-def index():
-    return 'index'
+@app.route('/' )
+def home():
+    return render_template("Home.html")
+
+@app.route('/form', methods =["GET", "POST"])
+def form():
+    if request.method == "POST":
+         return render_template("Form.html")
+    return render_template("Form.html")
 
 

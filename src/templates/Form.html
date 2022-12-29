@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{ url_for("form")}}" method="post">
+        <label for="recmail">Recipient MailID:</label>
+        <input type="text" id="recmail" name="Recipient" placeholder="example@gmail.com">
+        {}
+        <button type="submit">Schedule</button>
+    </form>
+</body>
+</html>
