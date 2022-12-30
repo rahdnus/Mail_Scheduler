@@ -4,17 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Document</title>
 </head>
 
 <body>
+    <div class="blck">
+        <div class="blck"style="margin: auto;">
+            <span style="font-size: 1.8rem; font-weight: bold;">MAIL SCHEDULER</span><br>
+        </div>
     <form action="{{ url_for("choice")}}" method="post">
-        <select name="Subject" id="Subject">
+        <div class="blck">
+        <select class="input glass" name="Subject" id="Subject">
             <option value="Birthday">Birthday</option>
             <option value="Anniversary">Anniversary</option>
         </select>
-        <button type="submit">Done</button>
+        </div>
+        <br>
+        <button style="margin:auto; font-size: 1.3rem; font-weight: bold;" class="button glass"  type="submit">Done</button>
     </form>
+    </div>
 </body>
 
 </html>

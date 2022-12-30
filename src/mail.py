@@ -51,7 +51,7 @@ def bform():
         subject = f'Happy Birthday {name}!'
         body = f"""
         Many More Happy Returns of the Day {name}
-        Congrats on your {age+numpost(age)} birthday
+        Congrats on your {age+numpost(int(age))} birthday
         """
         print(time)
         sched.add_job(lambda:sendMail(email_receiver,subject,body),'date',run_date = time )
@@ -72,7 +72,7 @@ def aform():
         subject = f'Happy Wedding Anniversary {name_husband} and {name_wife}!'
         body = f"""
         Many More Happy Returns of the Day {name_husband} and {name_wife}
-        Congrats on your {years+numpost(years)} anniversary
+        Congrats on your {years+numpost(int(years))} anniversary
         """
         sched.add_job(lambda:[sendMail(email_husband,subject,body),sendMail(email_wife,subject,body)],'date',run_date = time )
         return render_template("End.html")

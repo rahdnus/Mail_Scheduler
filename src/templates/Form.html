@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Document</title>
 </head>
+
 <body>
     {% if choice=="Birthday"%}
     <form action="{{url_for("bform")}}" method="get">
@@ -13,29 +17,52 @@
     {% endif %}
 
     {% if choice=="Birthday"%}
+    <div class="blck">
         <label for="recmail">Recipient MailID:</label>
-        <input type="text" id="recmail" name="recipientMail" placeholder="example@gmail.com">
+        <input class="input glass" type="text" id="recmail" name="recipientMail" placeholder="example@gmail.com">
+    </div>
+    <div class="blck">
         <label for="recname">Recipient name:</label>
-        <input type="text" id="recname" name="name" placeholder="name">
+        <input class="input glass" type="text" id="recname" name="name" placeholder="name">
+    </div>
+    <div class="blck">
         <label for="age">Current age:</label>
-        <input type="number" id="age" name="age" placeholder="eg.,20">
+        <input class="input glass" type="number" id="age" name="age" placeholder="eg.,20">
+    </div>
+    <div class="blck">
         <label for="time">Birthday (date and time):</label>
-        <input type="datetime-local" id="time" name="time">
+        <input class="input glass" type="datetime-local" id="time" name="time">
+    </div>  
+
+      
     {% elif choice=="Anniversary"%}
+    <div class="blck">
         <label for="rechusmail">Hubsand MailID:</label>
-        <input type="text" id="rechusmail" name="recipientHusbandMail" placeholder="example@gmail.com">
+        <input class="input glass" type="text" id="rechusmail" name="recipientHusbandMail" placeholder="example@gmail.com">
+    </div>
+    <div class="blck">
         <label for="recwifemail">Wife MailID:</label>
-        <input type="text" id="recwifemail" name="recipientWifeMail" placeholder="example@gmail.com">
+        <input class="input glass" type="text" id="recwifemail" name="recipientWifeMail" placeholder="example@gmail.com">
+    </div>
+    <div class="blck">
         <label for="hus">Husband Name:</label>
-        <input type="text" id="hus" name="husband" placeholder="eg.,name">
+        <input class="input glass" type="text" id="hus" name="husband" placeholder="eg.,name">
+    </div>
+    <div class="blck">
         <label for="wife">Wife Name:</label>
-        <input type="text" id="wife" name="wife" placeholder="eg.,name">
+        <input class="input glass" type="text" id="wife" name="wife" placeholder="eg.,name">
+    </div>
+    <div class="blck">
         <label for="years">Number of Years:</label>
-        <input type="number" id="years" name="years" placeholder="eg.,10">
+        <input class="input glass" type="number" id="years" name="years" placeholder="eg.,10">
+    </div>
+    <div class="blck">
         <label for="time">Anniversary Date & Time:</label>
-        <input type="datetime-local" id="time" name="time">
+        <input class="input glass" type="datetime-local" id="time" name="time">
+    </div>
     {% endif %}
-        <button type="submit">Schedule</button>
+    <br>
+        <button style="margin:auto; font-size: 1.3rem; font-weight: bold;" class="button glass"   class="button glass" type="submit">Schedule</button>
     </form>
 </body>
 </html>
