@@ -1,7 +1,7 @@
 import smtplib
 import ssl
 from email.message import EmailMessage
-from flask import url_for,Flask, request, render_template
+from flask import url_for,Flask, request, render_template,redirect
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import date, datetime
 
@@ -38,16 +38,40 @@ sched.start()
 def home():
     return render_template("Home.html")
 
-@app.route('/form', methods =["GET", "POST"])
-def form():
+@app.route('/', methods =["POST"])
+def choice():
+    if request.method == "POST":
+        subjectchoice=request.form.get("Subject")
+        if subjectchoice=="Birthday":
+            return redirect(url_for("bform"), code=307)
+        elif subjectchoice=="Anniversary":
+            return redirect(url_for("aform"), code=307)
+
+@app.route('/birthday',methods=["GET","POST"])
+def bform():
     if request.method == "GET":
-        subject=request.args.get("Subject")
-        return render_template("Form.html",subject=subject)
-    elif request.method == "POST":
-        time=request.form.get('time')
+        time=request.args.get('time')
         time=time[0:10]+" "+time[11:]+":00"
+        email_receiver = request.args.get('RecipientMail')
+        subjectchoice=choice
+        subject = 'Check out my new video!'
+        body = """
+        I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
+        """
         print(time)
-        return render_template("Home.html")
-    return render_template("Form.html")
+        return render_template("End.html")
+    return render_template("Form.html",choice="Birthday")
 
-
+@app.route('/anniversary',methods=["GET","POST"])
+def aform():
+    if request.method == "GET":
+        time=request.args.get('time')
+        time=time[0:10]+" "+time[11:]+":00"
+        email_receiver = request.args.get('RecipientMail')
+        subject = 'Check out my new video!'
+        body = """
+        I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
+        """
+        print(time)
+        return render_template("End.html")
+    return render_template("Form.html",choice="Anniversary")
