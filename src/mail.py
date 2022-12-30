@@ -7,17 +7,8 @@ from datetime import date, datetime
 
 email_sender = 'rahdnus119@gmail.com'
 email_password = 'ftnecmsombzteuti'
-email_receiver = 'rahdnus119@gmail.com'
-subject = 'Check out my new video!'
-body = """
-I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
-"""
 
 app = Flask(__name__)
-
-def sensor():
-    """ Function for test purposes. """
-    print("Scheduler is alive!")
 
 def sendMail(email_receiver,subject,body):
     em = EmailMessage()
@@ -31,7 +22,6 @@ def sendMail(email_receiver,subject,body):
         smtp.sendmail(email_sender, email_receiver, em.as_string())
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(lambda:sendMail(email_receiver,subject,body),'date',run_date = datetime(2022, 12, 29, 19, 42, 0) )
 sched.start()
 
 @app.route('/' )
@@ -63,6 +53,7 @@ def bform():
         I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
         """
         print(time)
+        sched.add_job(lambda:sendMail(email_receiver,subject,body),'date',run_date = time )
         return render_template("End.html")
     return render_template("Form.html",choice="Birthday")
 
@@ -82,6 +73,7 @@ def aform():
         body = """
         I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
         """
+        sched.add_job(lambda:[sendMail(email_husband,subject,body),sendMail(email_wife,subject,body)],'date',run_date = time )
         return render_template("End.html")
     return render_template("Form.html",choice="Anniversary")
 
