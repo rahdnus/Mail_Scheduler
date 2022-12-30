@@ -50,11 +50,15 @@ def choice():
 @app.route('/birthday',methods=["GET","POST"])
 def bform():
     if request.method == "GET":
+        email_receiver = request.args.get('recipientMail')
+        name = request.args.get('name')
+        age = request.args.get('age')
+        print(age)
         time=request.args.get('time')
         time=time[0:10]+" "+time[11:]+":00"
-        email_receiver = request.args.get('RecipientMail')
-        subjectchoice=choice
-        subject = 'Check out my new video!'
+        if len(time)<18 or name=="" or age==None:
+            return render_template("Form.html",choice="Birthday")
+        subject = f'Happy Birthday {name}!'
         body = """
         I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
         """
@@ -65,13 +69,29 @@ def bform():
 @app.route('/anniversary',methods=["GET","POST"])
 def aform():
     if request.method == "GET":
+        email_wife= request.args.get('recipientHusbandMail')
+        email_husband= request.args.get('recipientWifeMail')
+        name_husband = request.args.get('hus')
+        name_wife = request.args.get('wife')
+        years = request.args.get('years')
+        years = numpos(years)
         time=request.args.get('time')
         time=time[0:10]+" "+time[11:]+":00"
-        email_receiver = request.args.get('RecipientMail')
-        subject = 'Check out my new video!'
+        print(time)
+        subject = f'Happy Wedding Anniversary {name_husband} and {name_wife}!'
         body = """
         I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
         """
-        print(time)
         return render_template("End.html")
     return render_template("Form.html",choice="Anniversary")
+
+def numpos(num):
+    low=num%10
+    if low==1:
+        return "st"
+    elif low==2:
+        return "nd"
+    elif low==3:
+        return "rd"
+    else:
+        return "th"

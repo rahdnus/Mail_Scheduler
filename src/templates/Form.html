@@ -11,22 +11,27 @@
     {% elif choice=="Anniversary"%}
     <form action="{{url_for("aform")}}" method="get">
     {% endif %}
+
+    {% if choice=="Birthday"%}
         <label for="recmail">Recipient MailID:</label>
-        <input type="text" id="recmail" name="RecipientMail" placeholder="example@gmail.com">
+        <input type="text" id="recmail" name="recipientMail" placeholder="example@gmail.com">
         <label for="recname">Recipient name:</label>
         <input type="text" id="recname" name="name" placeholder="name">
-    {% if choice=="Birthday"%}
         <label for="age">Current age:</label>
-        <input type="text" id="age" name="age" placeholder="eg.,20">
+        <input type="number" id="age" name="age" placeholder="eg.,20">
         <label for="time">Birthday (date and time):</label>
         <input type="datetime-local" id="time" name="time">
     {% elif choice=="Anniversary"%}
-        <label for="hus">Husband:</label>
+        <label for="rechusmail">Hubsand MailID:</label>
+        <input type="text" id="rechusmail" name="recipientHusbandMail" placeholder="example@gmail.com">
+        <label for="recwifemail">Wife MailID:</label>
+        <input type="text" id="recwifemail" name="recipientWifeMail" placeholder="example@gmail.com">
+        <label for="hus">Husband Name:</label>
         <input type="text" id="hus" name="husband" placeholder="eg.,name">
-        <label for="wife">Wife:</label>
+        <label for="wife">Wife Name:</label>
         <input type="text" id="wife" name="wife" placeholder="eg.,name">
         <label for="years">Number of Years:</label>
-        <input type="text" id="years" name="years" placeholder="eg.,10">
+        <input type="number" id="years" name="years" placeholder="eg.,10">
         <label for="time">Anniversary Date & Time:</label>
         <input type="datetime-local" id="time" name="time">
     {% endif %}
