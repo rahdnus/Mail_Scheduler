@@ -40,8 +40,14 @@ def home():
 
 @app.route('/form', methods =["GET", "POST"])
 def form():
-    if request.method == "POST":
-         return render_template("Form.html")
+    if request.method == "GET":
+        subject=request.args.get("Subject")
+        return render_template("Form.html",subject=subject)
+    elif request.method == "POST":
+        time=request.form.get('time')
+        time=time[0:10]+" "+time[11:]+":00"
+        print(time)
+        return render_template("Home.html")
     return render_template("Form.html")
 
 
