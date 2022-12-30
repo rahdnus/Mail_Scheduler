@@ -3,7 +3,7 @@ import ssl
 from email.message import EmailMessage
 from flask import url_for,Flask, request, render_template,redirect
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import date, datetime
+# from datetime import date, datetime
 
 email_sender = 'rahdnus119@gmail.com'
 email_password = 'ftnecmsombzteuti'
@@ -66,14 +66,13 @@ def aform():
         name_husband = request.args.get('hus')
         name_wife = request.args.get('wife')
         years = request.args.get('years')
-        years = years+numpost(years)
         time=request.args.get('time')
         time=time[0:10]+" "+time[11:]+":00"
         print(time)
         subject = f'Happy Wedding Anniversary {name_husband} and {name_wife}!'
         body = f"""
         Many More Happy Returns of the Day {name_husband} and {name_wife}
-        Congrats on your {years} anniversary
+        Congrats on your {years+numpost(years)} anniversary
         """
         sched.add_job(lambda:[sendMail(email_husband,subject,body),sendMail(email_wife,subject,body)],'date',run_date = time )
         return render_template("End.html")
