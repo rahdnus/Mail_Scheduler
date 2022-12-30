@@ -49,8 +49,9 @@ def bform():
         if len(time)<18 or name=="" or age==None:
             return render_template("Form.html",choice="Birthday")
         subject = f'Happy Birthday {name}!'
-        body = """
-        I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
+        body = f"""
+        Many More Happy Returns of the Day {name}
+        Congrats on your {age+numpost(age)} birthday
         """
         print(time)
         sched.add_job(lambda:sendMail(email_receiver,subject,body),'date',run_date = time )
@@ -65,19 +66,20 @@ def aform():
         name_husband = request.args.get('hus')
         name_wife = request.args.get('wife')
         years = request.args.get('years')
-        years = numpos(years)
+        years = years+numpost(years)
         time=request.args.get('time')
         time=time[0:10]+" "+time[11:]+":00"
         print(time)
         subject = f'Happy Wedding Anniversary {name_husband} and {name_wife}!'
-        body = """
-        I've just published a new video on YouTube: https://youtu.be/2cZzP9DLlkg
+        body = f"""
+        Many More Happy Returns of the Day {name_husband} and {name_wife}
+        Congrats on your {years} anniversary
         """
         sched.add_job(lambda:[sendMail(email_husband,subject,body),sendMail(email_wife,subject,body)],'date',run_date = time )
         return render_template("End.html")
     return render_template("Form.html",choice="Anniversary")
 
-def numpos(num):
+def numpost(num):
     low=num%10
     if low==1:
         return "st"
